@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using UnityEngine;
 
 
@@ -9,7 +10,12 @@ public class OneGame
 {
     public string day;
     public int[] win_numbers = new int[6];
-    public int[] picked_numbers = new int[6];
+    public int[] first_picked_numbers = new int[6];
+    public int[] second_picked_numbers = new int[6];
+    public int[] third_picked_numbers = new int[6];
+    public int[] fourth_picked_numbers = new int[6];
+    public int[] fifth_picked_numbers = new int[6];
+    public int take_value;
 
 }
 
@@ -17,16 +23,36 @@ public class OneGame
 public class GameData
 {
     public int m_money;
-    public int[] numbers = new int[6];
+    public List<OneGame> games = new List<OneGame>();
 
     public void printData()
     {
         Debug.Log("Money : " + m_money);
-        Debug.Log("picked number : " + numbers[0] + numbers[1] + numbers[2] + numbers[3] + numbers[4] + numbers[5]);
+
+        for (int i = 0; i < games.Count; i++)
+        {
+
+        }
     }
 
 }
 
+/*
+ //use list to array -> list.ToArray()
+[Serializable]
+public class ListToArray<T>
+{
+    [SerializeField]
+    List<T> target;
+
+    public List<T> ToList() { return target; }
+
+    public ListToArray(List<T> target)
+    {
+        this.target = target;
+    }
+}
+*/
 
 public class JsonTest : MonoBehaviour
 {
@@ -35,23 +61,62 @@ public class JsonTest : MonoBehaviour
     {
         GameData data = new GameData();
         data.m_money = 10000;
-        for (int i = 0; i < 6; ++i)
-            data.numbers[i] = i;
+        //
+        //string str = JsonUtility.ToJson(data);
+        //
+        //Debug.Log("ToJson : " + str);
+        //
+        //GameData data2 = JsonUtility.FromJson<GameData>(str);
+        //data2.printData();
+        //
+        //GameData data3 = new GameData();
+        //data3.m_money = 9000;
+        //for (int i = 0; i < 6; ++i)
+        //    data3.numbers[i] = i*2;
 
+        //File.WriteAllText(Application.dataPath + "/TestJson.json", JsonUtility.ToJson(data3));
 
-        string str = JsonUtility.ToJson(data);
+        //List<OneGame> playedGames = new List<OneGame>();
 
-        Debug.Log("ToJson : " + str);
+        OneGame firstgame = new OneGame();
+        firstgame.day = DateTime.Now.ToString();
+        for (int i = 0; i < 6; i++)
+        {
+            firstgame.win_numbers[i] = i * 3;
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            firstgame.first_picked_numbers[i] = i * 1;
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            firstgame.second_picked_numbers[i] = i * 2;
+        }
 
-        GameData data2 = JsonUtility.FromJson<GameData>(str);
-        data2.printData();
+        data.games.Add(firstgame);
 
-        GameData data3 = new GameData();
-        data3.m_money = 9000;
-        for (int i = 0; i < 6; ++i)
-            data3.numbers[i] = i*2;
+        OneGame secondgame = new OneGame();
+        secondgame.day = DateTime.Now.ToString();
+        for (int i = 0; i < 6; i++)
+        {
+            secondgame.win_numbers[i] = i * 4;
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            secondgame.first_picked_numbers[i] = i * 2;
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            secondgame.second_picked_numbers[i] = i * 4;
+        }
 
-        File.WriteAllText(Application.dataPath + "/TestJson.json", JsonUtility.ToJson(data3));
+        data.games.Add(secondgame);
+
+        //string str = JsonUtility.ToJson(new Serialization<Enemy>(enemies));
+
+        data.games.ToArray(); //**** list to array. list cant write to json.
+
+        File.WriteAllText(Application.dataPath + "/TestJson.json", JsonUtility.ToJson(data));
 
         //file load
         string str2 = File.ReadAllText(Application.dataPath + "/TestJson.json");
