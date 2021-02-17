@@ -6,7 +6,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class OneGame
+public class OneGame_test
 {
     public string day;
     public int[] win_numbers = new int[6];
@@ -20,10 +20,10 @@ public class OneGame
 }
 
 [System.Serializable]
-public class GameData
+public class GameData_test
 {
     public int m_money;
-    public List<OneGame> games = new List<OneGame>();
+    public List<OneGame_test> games = new List<OneGame_test>();
 
     public void printData()
     {
@@ -59,7 +59,7 @@ public class JsonTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameData data = new GameData();
+        GameData_test data = new GameData_test();
         data.m_money = 10000;
         //
         //string str = JsonUtility.ToJson(data);
@@ -78,7 +78,7 @@ public class JsonTest : MonoBehaviour
 
         //List<OneGame> playedGames = new List<OneGame>();
 
-        OneGame firstgame = new OneGame();
+        OneGame_test firstgame = new OneGame_test();
         firstgame.day = DateTime.Now.ToString();
         for (int i = 0; i < 6; i++)
         {
@@ -95,7 +95,7 @@ public class JsonTest : MonoBehaviour
 
         data.games.Add(firstgame);
 
-        OneGame secondgame = new OneGame();
+        OneGame_test secondgame = new OneGame_test();
         secondgame.day = DateTime.Now.ToString();
         for (int i = 0; i < 6; i++)
         {
@@ -121,7 +121,7 @@ public class JsonTest : MonoBehaviour
         //file load
         string str2 = File.ReadAllText(Application.dataPath + "/TestJson.json");
 
-        GameData data4 = JsonUtility.FromJson<GameData>(str2);
+        GameData_test data4 = JsonUtility.FromJson<GameData_test>(str2);
         data4.printData();
 
     }

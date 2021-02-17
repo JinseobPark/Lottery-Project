@@ -8,12 +8,12 @@ public class Main_current_money : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CurrentMoneyText.text = "Money : " + GlobalMoney.Instance.GetGlobalMoney();
+        CurrentMoneyText.text = "Money : " + GameData.Instance.GetGameMoney();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CurrentMoneyText.text = "Money : " + GlobalMoney.Instance.GetGlobalMoney();
+        CurrentMoneyText.text = "Money : " + GameData.Instance.GetGameMoney();
     }
 }

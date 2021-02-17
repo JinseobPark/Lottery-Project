@@ -19,6 +19,6 @@ public class Main_Button_Manager : MonoBehaviour
 
     public void GiveMoneyButton()
     {
-        GlobalMoney.Instance.AddGlobalMoney(takemoney);
+        GameData.Instance.AddGameMoney(takemoney);
     }
 }

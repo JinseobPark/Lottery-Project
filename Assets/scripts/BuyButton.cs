@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class BuyButton : MonoBehaviour
 {
     public buttonManager BMscript;
-    public GameSystem GSscript;
+    //public GameSystem GSscript;
     // Start is called before the first frame update
     void Start()
     {
         BMscript = GameObject.Find("EventSystem").GetComponent<buttonManager>();
-        GSscript = GameObject.Find("EventSystem").GetComponent<GameSystem>();
+        //GSscript = GameObject.Find("EventSystem").GetComponent<GameSystem>();
     }
 
     // Update is called once per frame
@@ -24,9 +24,13 @@ public class BuyButton : MonoBehaviour
     {
         if (CanBuyTicket())
         {
-            GlobalMoney.Instance.SubGlobalMoney(BMscript.current_enrolled_number * 1000);
-            GSscript.can_buy = false;
-            //destroy 
+            //GlobalMoney.Instance.SubGlobalMoney(BMscript.current_enrolled_number * 1000);
+            //GSscript.can_buy = false;
+            GameData.Instance.SubGameMoney(BMscript.current_enrolled_number * 1000);
+            GameData.Instance.AddPickedNumbersFromPickedArray(BMscript);
+            GameData.Instance.SaveGameDataToJson();
+
+            //movemove
             SceneManager.LoadScene("Main");
         }
     }
@@ -34,7 +38,7 @@ public class BuyButton : MonoBehaviour
     bool CanBuyTicket()
     {
         //if (GSscript.GameMoney >= BMscript.current_enrolled_number * 1000 && GSscript.can_buy)
-        if(GlobalMoney.Instance.GetGlobalMoney() >= BMscript.current_enrolled_number * 1000 && GSscript.can_buy)
+        if(GameData.Instance.GetGameMoney() >= BMscript.current_enrolled_number * 1000)
             return true;
         else
             return false;
