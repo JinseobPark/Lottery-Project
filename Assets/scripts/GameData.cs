@@ -96,6 +96,12 @@ public class GameData : MonoBehaviour
         g_gamedata.one_games.Add(onegame);
     }
 
+    public void ClearData()
+    {
+        g_gamedata.global_money = 0;
+        g_gamedata.one_games.Clear();
+    }
+
     public void AddPickedNumbersFromPickedArray(buttonManager pickedArray)
     {
         OneGame addToOnegame = new OneGame();
@@ -112,6 +118,17 @@ public class GameData : MonoBehaviour
 
         AddOneGames(addToOnegame);
     }
+
+    public void UpdateLastGame(OneGame updateGame)
+    {
+        g_gamedata.one_games[g_gamedata.one_games.Count - 1].day_time = updateGame.day_time;
+        g_gamedata.one_games[g_gamedata.one_games.Count - 1].picked_game = updateGame.picked_game;
+        g_gamedata.one_games[g_gamedata.one_games.Count - 1].won_numbers = updateGame.won_numbers;
+        g_gamedata.one_games[g_gamedata.one_games.Count - 1].take_value = updateGame.take_value;
+        g_gamedata.global_money += updateGame.take_value;
+
+    }
+
     public OneGame GetLastGame()
     {
         return g_gamedata.one_games[g_gamedata.one_games.Count-1];

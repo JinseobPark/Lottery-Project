@@ -1,165 +1,65 @@
 {
-    "global_money": 13000,
+    "global_money": 4000,
     "one_games": [
         {
-            "day_time": "2021-02-17 PM 6:52:39",
+            "day_time": "2/18/2021 5:27:16 PM",
             "won_numbers": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
+                3,
+                4,
+                16,
+                23,
+                25,
+                37
             ],
             "picked_game": [
                 {
                     "picked_numbers": [
-                        26,
-                        27,
-                        32,
-                        33,
-                        34,
-                        39
-                    ]
-                }
-            ],
-            "take_value": 0
-        },
-        {
-            "day_time": "2021-02-17 PM 6:53:01",
-            "won_numbers": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "picked_game": [
-                {
-                    "picked_numbers": [
+                        17,
+                        18,
                         20,
+                        24,
                         26,
-                        27,
-                        32,
-                        33,
-                        40
-                    ]
-                },
-                {
-                    "picked_numbers": [
-                        12,
-                        13,
-                        19,
-                        25,
-                        31,
-                        38
+                        27
                     ]
                 },
                 {
                     "picked_numbers": [
                         13,
                         14,
-                        17,
-                        18,
                         19,
-                        23
-                    ]
-                }
-            ],
-            "take_value": 0
-        },
-        {
-            "day_time": "2021-02-17 PM 6:55:42",
-            "won_numbers": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "picked_game": [
-                {
-                    "picked_numbers": [
-                        19,
-                        20,
+                        24,
                         25,
-                        26,
-                        27,
-                        32
+                        31
                     ]
-                }
-            ],
-            "take_value": 0
-        },
-        {
-            "day_time": "2021-02-17 PM 6:56:01",
-            "won_numbers": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "picked_game": [
+                },
                 {
                     "picked_numbers": [
+                        2,
+                        10,
+                        18,
                         26,
-                        27,
-                        32,
-                        33,
                         34,
-                        39
+                        42
                     ]
-                }
-            ],
-            "take_value": 0
-        },
-        {
-            "day_time": "2021-02-17 PM 7:11:06",
-            "won_numbers": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "picked_game": [
+                },
+                {
+                    "picked_numbers": [
+                        6,
+                        12,
+                        18,
+                        24,
+                        30,
+                        36
+                    ]
+                },
                 {
                     "picked_numbers": [
                         10,
                         11,
-                        18,
-                        26,
-                        33,
-                        34
-                    ]
-                }
-            ],
-            "take_value": 0
-        },
-        {
-            "day_time": "2021-02-17 PM 7:15:40",
-            "won_numbers": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "picked_game": [
-                {
-                    "picked_numbers": [
-                        6,
-                        7,
-                        13,
-                        20,
-                        26,
-                        33
+                        15,
+                        16,
+                        24,
+                        25
                     ]
                 }
             ],

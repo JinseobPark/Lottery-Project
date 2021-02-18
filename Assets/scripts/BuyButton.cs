@@ -31,7 +31,7 @@ public class BuyButton : MonoBehaviour
             GameData.Instance.SaveGameDataToJson();
 
             //movemove
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Lottery645result");
         }
     }
 

@@ -21,4 +21,12 @@ public class Main_Button_Manager : MonoBehaviour
     {
         GameData.Instance.AddGameMoney(takemoney);
     }
+
+    public void ResetButton()
+    {
+        //Warnning!!
+        GameData.Instance.ClearData();
+        GameData.Instance.SaveGameDataToJson();
+    }
+
 }
