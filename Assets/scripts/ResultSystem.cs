@@ -1,27 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResultSystem : MonoBehaviour
 {
-    public List<GameObject> picked_objects = new List<GameObject>();
+    //keep for just show number text
+    /*
+    [System.Serializable]
+    public class ShowPickedNumberObjects
+    {
+        public GameObject[] number_objects = new GameObject[6];
+    }
+    */
+    //public List<ShowPickedNumberObjects> YourPickedObjects;
+
+    public GameObject[] WonGameObjects = new GameObject[6];
+    public GameObject WonGameBonusObject;
+
+
     public List<int> picked_numbers = new List<int>();
+    public int Bonus_number = new int();
+    //public bool Matched_bonus = false;
 
     public OneGame thisGame = new OneGame();
 
-    public int NoneMatchPrise = 0;
-    public int ThreeMatchPrise = 5000;
-    public int FourMatchPrise = 50000;
-    public int FiveMatchPrise = 1000000;
-    public int BonusMatchPrise = 50000000;
-    public int SixMatchPrise = 2000000000;
+    public WonMoney_List wonmoney;
 
-
-
+    public Sprite[] sprites_balls = new Sprite[46];
+    
     public void PickWonNumbers()
     {
         picked_numbers.Clear();
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 7; i++)
         {
             int random_number = Random.Range(1, 46);
             picked_numbers.Add(random_number);
@@ -38,27 +49,38 @@ public class ResultSystem : MonoBehaviour
                 }
             }
         }
+        Bonus_number = picked_numbers[6];
+        picked_numbers.RemoveAt(picked_numbers.Count - 1);
     }
 
-    public void InputDataWonNumber()
+    public void InputWonNumberToGameData()
     {
         for (int i = 0; i < 6; i++)
         {
             thisGame.won_numbers[i] = picked_numbers[i];
         }
+        thisGame.won_bonus_number = Bonus_number;
     }
 
-    public void InputWonMoney()
+    public void Final_calculate_WonMoney()
     {
         int Money = 0;
         for (int i = 0; i < thisGame.picked_game.Count; i++)
         {
-            Money += matchedPrise(CountDiff(thisGame.picked_game[i]));
+            Money += matchedPrise(CountDiff(thisGame.picked_game[i]), BonusDiff(thisGame.picked_game[i]));
         }
 
         thisGame.take_value = Money;
 
-        //return Money;
+    }
+
+    public void ChangeWonNumberObjects()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            WonGameObjects[i].GetComponent<Image>().sprite = sprites_balls[picked_numbers[i]];
+        }
+        WonGameBonusObject.GetComponent<Image>().sprite = sprites_balls[Bonus_number];
     }
 
     public void ResortWonNumbers()
@@ -71,7 +93,7 @@ public class ResultSystem : MonoBehaviour
         int matched = 0;
         for (int i = 0; i < 6; i++)
         {
-            for (int j= 0; j < 6; j++)
+            for (int j = 0; j < 6; j++)
             {
                 if (picked_numbers[i] == pickedOneLine.picked_numbers[j])
                     matched++;
@@ -80,24 +102,43 @@ public class ResultSystem : MonoBehaviour
         return matched;
     }
 
-    public int matchedPrise(int matchCount)
+    public bool BonusDiff(PickedNumbersToOneGame pickedOneLine)
     {
-        switch(matchCount)
+        for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                if (Bonus_number == pickedOneLine.picked_numbers[j])
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    public int matchedPrise(int matchCount, bool bonusmatch)
+    {
+        switch (matchCount)
         {
             case (0):
             case (1):
             case (2):
-                return 0;
+                return wonmoney.Get_WonMoney_645_NoneMatch();
             case (3):
-                return ThreeMatchPrise;
+                return wonmoney.Get_WonMoney_645_ThreeMatch();
             case (4):
-                return FourMatchPrise;
+                return wonmoney.Get_WonMoney_645_FourMatch();
             case (5):
-                return FiveMatchPrise;
+                {
+                    if (bonusmatch)
+                        return wonmoney.Get_WonMoney_645_BonusMatch();
+                    else
+                        return wonmoney.Get_WonMoney_645_FiveMatch();
+                }
             case (6):
-                return SixMatchPrise;
+                return wonmoney.Get_WonMoney_645_SixMatch();
             default:
-                return NoneMatchPrise ;
+                return wonmoney.Get_WonMoney_645_NoneMatch();
         }
     }
     public void ShowWonNumbersToText()
@@ -117,9 +158,11 @@ public class ResultSystem : MonoBehaviour
         PickWonNumbers();
         ResortWonNumbers();
         ShowWonNumbersToText();
-        InputDataWonNumber();
-        InputWonMoney();
+        InputWonNumberToGameData();
+        Final_calculate_WonMoney();
+        ChangeWonNumberObjects();
 
+        GameData.Instance.AddGameMoney(thisGame.take_value);
         GameData.Instance.UpdateLastGame(thisGame);
 
         GameData.Instance.SaveGameDataToJson();

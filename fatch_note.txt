@@ -11,3 +11,7 @@ for Android.
 
 21.01.05
 Add back to menu button.
+
+Must:
+add print day.
+show bought bill.

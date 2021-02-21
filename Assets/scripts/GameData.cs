@@ -13,12 +13,48 @@ public class PickedNumbersToOneGame
     public int[] picked_numbers = new int[6];
 }
 
+[System.Serializable]
+public class WonMoney_List
+{
+    public int WonMoney_645_NoneMatch = 0;
+    public int WonMoney_645_ThreeMatch = 5000;
+    public int WonMoney_645_FourMatch = 50000;
+    public int WonMoney_645_FiveMatch = 1000000;
+    public int WonMoney_645_BonusMatch = 50000000;
+    public int WonMoney_645_SixMatch = 2000000000;
+
+    public int Get_WonMoney_645_NoneMatch()
+    {
+        return WonMoney_645_NoneMatch;
+    }
+    public int Get_WonMoney_645_ThreeMatch()
+    {
+        return WonMoney_645_ThreeMatch;
+    }
+    public int Get_WonMoney_645_FourMatch()
+    {
+        return WonMoney_645_FourMatch;
+    }
+    public int Get_WonMoney_645_FiveMatch()
+    {
+        return WonMoney_645_FiveMatch;
+    }
+    public int Get_WonMoney_645_BonusMatch()
+    {
+        return WonMoney_645_BonusMatch;
+    }
+    public int Get_WonMoney_645_SixMatch()
+    {
+        return WonMoney_645_SixMatch;
+    }
+}
 
 [System.Serializable]
 public class OneGame
 {
     public string day_time;
     public int[] won_numbers = new int[6];
+    public int won_bonus_number;
     public List<PickedNumbersToOneGame> picked_game = new List<PickedNumbersToOneGame>();
     public int take_value;
 
@@ -28,8 +64,8 @@ public class OneGame
 public class GameData_Global
 {
     public int global_money;
+    public WonMoney_List WonMoney = new WonMoney_List();
     public List<OneGame> one_games = new List<OneGame>();
-
 }
 public class GameData : MonoBehaviour
 {
@@ -125,8 +161,6 @@ public class GameData : MonoBehaviour
         g_gamedata.one_games[g_gamedata.one_games.Count - 1].picked_game = updateGame.picked_game;
         g_gamedata.one_games[g_gamedata.one_games.Count - 1].won_numbers = updateGame.won_numbers;
         g_gamedata.one_games[g_gamedata.one_games.Count - 1].take_value = updateGame.take_value;
-        g_gamedata.global_money += updateGame.take_value;
-
     }
 
     public OneGame GetLastGame()
@@ -142,6 +176,7 @@ public class GameData : MonoBehaviour
         {
             g_gamedata.one_games[i].picked_game.ToArray();
         }
+        //g_gamedata.WonMoney.ToString();
         g_gamedata.one_games.ToArray();
         File.WriteAllText(Application.dataPath + "/gameData.json", JsonUtility.ToJson(g_gamedata, true));
     }
