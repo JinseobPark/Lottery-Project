@@ -22,6 +22,11 @@ public class Main_Button_Manager : MonoBehaviour
         GameData.Instance.AddGameMoney(takemoney);
     }
 
+    public void ShowBillButton()
+    {
+        SceneManager.LoadScene("Bill_Scene");
+    }
+
     public void ResetButton()
     {
         //Warnning!!

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lottery645result.unity
     guid: 1cc0766f0b31cfa429f191583b9cf16f
+  - enabled: 1
+    path: Assets/Scenes/Bill_Scene.unity
+    guid: 891da50c02fae4f5293e6216106b4a98
   m_configObjects: {}

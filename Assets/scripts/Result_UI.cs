@@ -7,6 +7,7 @@ public class Result_UI : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI MyPickText;
     public TMPro.TextMeshProUGUI WonMoneyText;
+    public TMPro.TextMeshProUGUI DayText;
 
     public ResultSystem resultsystem_sc;
 
@@ -48,6 +49,11 @@ public class Result_UI : MonoBehaviour
     public void BackToMenu()
     {
         SceneManager.LoadScene("Main");
+    }
+
+    public void ShowDay()
+    {
+        DayText.text = "Day : " + resultsystem_sc.thisGame.day_time;
     }
 
     // Start is called before the first frame update

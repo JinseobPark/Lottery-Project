@@ -469,6 +469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyPickText: {fileID: 0}
   WonMoneyText: {fileID: 0}
+  DayText: {fileID: 0}
   resultsystem_sc: {fileID: 0}
 --- !u!114 &554908437
 MonoBehaviour:
@@ -727,6 +728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyPickText: {fileID: 2045689411}
   WonMoneyText: {fileID: 507323910}
+  DayText: {fileID: 1112945725}
   resultsystem_sc: {fileID: 952758768}
 --- !u!1 &1112945723
 GameObject:
