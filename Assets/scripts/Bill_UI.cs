@@ -11,7 +11,7 @@ public class Bill_UI : MonoBehaviour
     public int currentPageNumber = 1;
     public int MaxPageNumber;
     public bool needEmptyPage;
-
+    
     public int leftPageNumber;
     public int RightPageNumber;
 
@@ -20,9 +20,9 @@ public class Bill_UI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MaxPageNumber = (GameData.g_gamedata.one_games.Count + 1) / 2;
+        MaxPageNumber = (GameData.g_gamedata.one_games.Count+1) / 2;
         needEmptyPage = CheckNeedEmptyPage(GameData.g_gamedata.one_games.Count);
-
+        if(MaxPageNumber >= 1)
         ShowPages(); 
     }
 
@@ -40,12 +40,12 @@ public class Bill_UI : MonoBehaviour
 
     public string ShowDay(OneGame one_game)
     {
-        return one_game.day_time + "\n";
+        return "Day : " + one_game.day_time + "\n";
     }
 
     public string ShowWonNumber(OneGame one_game)
     {
-        string result = " ";
+        string result = "Won :  ";
         for (int i = 0; i < 6; i++)
         {
             result += one_game.won_numbers[i] + " ";
@@ -57,7 +57,7 @@ public class Bill_UI : MonoBehaviour
 
     public string ShowPickedNumber(OneGame one_game)
     {
-        string result = " ";
+        string result = "";
 
         for (int i = 0; i < one_game.picked_game.Count; i++)
         {
@@ -82,21 +82,22 @@ public class Bill_UI : MonoBehaviour
         return result;
     }
 
+
     public string JudgePicked(int judgeNumber, OneGame one_game)
     {
         for (int i = 0; i < 6; i++)
         {
             if (judgeNumber == one_game.won_numbers[i])
-                return " <b>" + judgeNumber + "</b> ";
+                return " <b>" + judgeNumber.ToString("00") + "</b> ";
             if (judgeNumber == one_game.won_bonus_number)
-                return " <i>" + judgeNumber + "</i> ";
+                return " <i>" + judgeNumber.ToString("00") + "</i> ";
         }
-        return " " + judgeNumber + " ";
+        return " " + judgeNumber.ToString("00") + " ";
     }
 
     public string ShowGotMoney(OneGame one_game)
     {
-        string money = "";
+        string money = "Get : ";
         money += one_game.take_value;
         return money;
     }
@@ -104,7 +105,7 @@ public class Bill_UI : MonoBehaviour
 
     public void ShowLeftPage()
     {
-        leftPageNumber = 1 + (currentPageNumber - 1) * 2;
+        leftPageNumber = (currentPageNumber - 1) * 2;
         leftOneGame = GameData.g_gamedata.one_games[leftPageNumber];
         Bill_Left_Text.text = " " + ShowDay(leftOneGame) + ShowWonNumber(leftOneGame) + ShowPickedNumber(leftOneGame) + ShowGotMoney(leftOneGame);
         /*Day + won number + picked number + money*/
@@ -112,7 +113,16 @@ public class Bill_UI : MonoBehaviour
 
     public void ShowRightPage()
     {
-
+        RightPageNumber = 1 + (currentPageNumber - 1) * 2;
+        if (GameData.g_gamedata.one_games.Count >= RightPageNumber+1)
+        {
+            rightOneGame = GameData.g_gamedata.one_games[RightPageNumber];
+            Bill_Right_Text.text = " " + ShowDay(rightOneGame) + ShowWonNumber(rightOneGame) + ShowPickedNumber(rightOneGame) + ShowGotMoney(rightOneGame);
+        }
+        else
+        {
+            Bill_Right_Text.text = "";
+        }
     }
 
     public void ShowPages()

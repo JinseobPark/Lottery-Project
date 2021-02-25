@@ -1,5 +1,5 @@
 {
-    "global_money": 4000,
+    "global_money": 2000,
     "WonMoney": {
         "WonMoney_645_NoneMatch": 0,
         "WonMoney_645_ThreeMatch": 5000,
@@ -10,65 +10,25 @@
     },
     "one_games": [
         {
-            "day_time": "2/22/2021 3:32:11 PM",
+            "day_time": "2/25/2021 5:11:16 PM",
             "won_numbers": [
-                20,
-                22,
-                25,
-                30,
-                39,
-                41
+                15,
+                16,
+                31,
+                32,
+                40,
+                45
             ],
-            "won_bonus_number": 38,
+            "won_bonus_number": 4,
             "picked_game": [
                 {
                     "picked_numbers": [
-                        19,
-                        26,
-                        27,
-                        34,
-                        35,
-                        42
-                    ]
-                },
-                {
-                    "picked_numbers": [
-                        13,
-                        18,
-                        19,
-                        20,
-                        24,
-                        26
-                    ]
-                },
-                {
-                    "picked_numbers": [
+                        1,
+                        2,
                         3,
-                        9,
-                        17,
-                        23,
-                        31,
-                        37
-                    ]
-                },
-                {
-                    "picked_numbers": [
-                        5,
-                        18,
-                        20,
-                        31,
-                        34,
-                        44
-                    ]
-                },
-                {
-                    "picked_numbers": [
                         4,
-                        12,
-                        21,
-                        22,
-                        31,
-                        40
+                        5,
+                        6
                     ]
                 }
             ],
