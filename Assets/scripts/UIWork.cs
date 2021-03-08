@@ -49,9 +49,32 @@ public class UIWork : MonoBehaviour
         }
     }
 
+
+    public void AutoPick()
+    {
+        if (BMscript.current_button_number == BMscript.max_button_number)
+        {
+            if (Able_enroll())
+            {
+                //enroll
+                Reset_Numbers();
+            }
+            else
+            {
+                Debug.Log("max array!");
+            }
+        }
+        else if (BMscript.current_button_number < BMscript.max_button_number)
+        {
+            //cant enroll
+            Debug.Log("Pick 6 numbers");
+        }
+    }
+
     bool Able_enroll()
     {
-        if (BMscript.current_going_list != 0)
+
+        /*if (BMscript.current_going_list != 0)
         {
             Debug.Log("try to modify");
             BMscript.pickedArrays[BMscript.current_going_list - 1].ispicked = true;
@@ -68,7 +91,7 @@ public class UIWork : MonoBehaviour
             BMscript.current_going_list = 0;
             return true;
         }
-
+        */
         if (BMscript.current_enrolled_number < BMscript.max_enrolled_number)
         {
             Debug.Log("try enroll");
