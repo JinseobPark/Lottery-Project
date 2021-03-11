@@ -52,23 +52,44 @@ public class UIWork : MonoBehaviour
 
     public void AutoPick()
     {
-        if (BMscript.current_button_number == BMscript.max_button_number)
+        if (BMscript.current_button_number < BMscript.max_button_number) //if picked 0~5
         {
-            if (Able_enroll())
+            int diff_count = BMscript.max_button_number - BMscript.current_button_number;
+            for (int i = 0; i < diff_count; i++)
             {
-                //enroll
-                Reset_Numbers();
+                //pick number randomly
+                int ramdom_number = Random.Range(1, 46);
+                if(!BMscript.Current_picked_number[ramdom_number - 1]) // already not picked
+                {
+                    BMscript.buttonNumbers[ramdom_number - 1].GetComponent<buttonStat>().Selected();
+                }
+                else
+                {
+                    i--;
+                }
             }
-            else
+            /*
+             
+            for (int i = 0; i < 7; i++)
             {
-                Debug.Log("max array!");
+                int random_number = Random.Range(1, 46);
+                picked_numbers.Add(random_number);
+                //Debug.Log("array size : " + picked_numbers.Count);
+                for (int checker = 0; checker < picked_numbers.Count - 1; ++checker)
+                {
+                    //Debug.Log("array :  " + picked_numbers[checker] + "   random number :  " + random_number);
+                    if (picked_numbers[checker] == random_number)
+                    {
+                        Debug.Log("same!!");
+                        i--;
+                        picked_numbers.RemoveAt(picked_numbers.Count - 1);
+                        break;
+                    }
+                }
             }
+             */
         }
-        else if (BMscript.current_button_number < BMscript.max_button_number)
-        {
-            //cant enroll
-            Debug.Log("Pick 6 numbers");
-        }
+        //else. nope change.
     }
 
     bool Able_enroll()
