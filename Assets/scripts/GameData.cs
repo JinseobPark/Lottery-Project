@@ -127,9 +127,11 @@ public class GameData : MonoBehaviour
 
     public void AddOneGames(OneGame onegame)
     {
+        //if more 10 games, delete oldest game.
         if (g_gamedata.one_games.Count > 10)
-            g_gamedata.one_games.RemoveAt(0);
-        g_gamedata.one_games.Add(onegame);
+            g_gamedata.one_games.RemoveAt(9);
+        //g_gamedata.one_games.Add(onegame);
+        g_gamedata.one_games.Insert(0, onegame);
     }
 
     public void ClearData()
@@ -157,15 +159,15 @@ public class GameData : MonoBehaviour
 
     public void UpdateLastGame(OneGame updateGame)
     {
-        g_gamedata.one_games[g_gamedata.one_games.Count - 1].day_time = updateGame.day_time;
-        g_gamedata.one_games[g_gamedata.one_games.Count - 1].picked_game = updateGame.picked_game;
-        g_gamedata.one_games[g_gamedata.one_games.Count - 1].won_numbers = updateGame.won_numbers;
-        g_gamedata.one_games[g_gamedata.one_games.Count - 1].take_value = updateGame.take_value;
+        g_gamedata.one_games[0].day_time = updateGame.day_time;
+        g_gamedata.one_games[0].picked_game = updateGame.picked_game;
+        g_gamedata.one_games[0].won_numbers = updateGame.won_numbers;
+        g_gamedata.one_games[0].take_value = updateGame.take_value;
     }
 
     public OneGame GetLastGame()
     {
-        return g_gamedata.one_games[g_gamedata.one_games.Count-1];
+        return g_gamedata.one_games[0];
     }
 
 
