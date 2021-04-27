@@ -26,6 +26,7 @@ public class UIWork : MonoBehaviour
             BMscript.buttonNumbers[i].GetComponent<buttonStat>().ChangeToNope();
         }
         BMscript.current_button_number = 0;
+        BMscript.current_going_list = 0;
     }
 
     public void Enroll_numbers()

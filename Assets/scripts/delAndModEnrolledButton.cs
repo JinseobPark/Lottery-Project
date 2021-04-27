@@ -51,19 +51,15 @@ public class delAndModEnrolledButton : MonoBehaviour
             {
                 int picked_number = BMscript.pickedArrays[line_number-1].picked_numbers[i];
                 BMscript.buttonNumbers[picked_number-1].GetComponent<buttonStat>().ChangeToPick();
+                BMscript.pickedArrays[line_number - 1].picked_balls[i].GetComponent<Image>().sprite = BMscript.picked_balls[0];
             }
-
+            BMscript.pickedArrays[line_number - 1].ispicked = false;
             BMscript.pickedArrays[line_number - 1].picked_numbers.Clear();
             BMscript.current_button_number = 6;
 
-
+            BMscript.current_enrolled_number--;
             BMscript.current_going_list = line_number;
         }
-
-
-
-
-
     }
 
 }
