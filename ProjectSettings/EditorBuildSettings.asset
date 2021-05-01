@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bill_Scene.unity
     guid: 891da50c02fae4f5293e6216106b4a98
+  - enabled: 1
+    path: Assets/Scenes/Option.unity
+    guid: 2ca7de81833ddc848851d686c8ecb66e
   m_configObjects: {}

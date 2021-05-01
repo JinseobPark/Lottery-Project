@@ -34,4 +34,9 @@ public class Main_Button_Manager : MonoBehaviour
         GameData.Instance.SaveGameDataToJson();
     }
 
+    public void OptionButton()
+    {
+        SceneManager.LoadScene("Option");
+    }
+
 }
