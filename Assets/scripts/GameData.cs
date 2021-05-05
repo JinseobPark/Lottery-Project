@@ -174,19 +174,30 @@ public class GameData : MonoBehaviour
 
     public void SaveGameDataToJson()
     {
+        string gamedatafilePath = Application.persistentDataPath + "/gameData.json";
         for (int i = 0; i < g_gamedata.one_games.Count; i++)
         {
             g_gamedata.one_games[i].picked_game.ToArray();
         }
         //g_gamedata.WonMoney.ToString();
         g_gamedata.one_games.ToArray();
-        File.WriteAllText(Application.dataPath + "/gameData.json", JsonUtility.ToJson(g_gamedata, true));
+        File.WriteAllText(gamedatafilePath, JsonUtility.ToJson(g_gamedata, true));
     }
 
     public void ReadGameDataFromJson()
     {
-        string str_gamedata = File.ReadAllText(Application.dataPath + "/gameData.json");
-        g_gamedata = JsonUtility.FromJson<GameData_Global>(str_gamedata);
+        string gamedatafilePath = Application.persistentDataPath + "/gameData.json";
+        if (File.Exists(gamedatafilePath))
+        {
+            string str_gamedata = File.ReadAllText(gamedatafilePath);
+            g_gamedata = JsonUtility.FromJson<GameData_Global>(str_gamedata);
+        }
+        else
+        {
+            ClearData();
+            SetGameMoney(5000);
+            File.WriteAllText(gamedatafilePath, JsonUtility.ToJson(g_gamedata, true));
+        }
     }
     // Start is called before the first frame update
     void Start()

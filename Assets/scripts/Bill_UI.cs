@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public class Bill_UI : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI Bill_Left_Text;
@@ -17,6 +19,12 @@ public class Bill_UI : MonoBehaviour
 
     public OneGame leftOneGame;
     public OneGame rightOneGame;
+
+    //Back image for lang
+    public Sprite BackImage_E;
+    public Sprite BackImage_K;
+    public Image BackImage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +32,7 @@ public class Bill_UI : MonoBehaviour
         needEmptyPage = CheckNeedEmptyPage(GameData.g_gamedata.one_games.Count);
         if(MaxPageNumber >= 1)
         ShowPages(); 
+        LanguageUpdate();
     }
 
     public bool CheckNeedEmptyPage(int ToModTwo)
@@ -123,6 +132,12 @@ public class Bill_UI : MonoBehaviour
         {
             Bill_Right_Text.text = "";
         }
+    }
+
+    public void LanguageUpdate()
+    {
+        bool IsKorean = OptionData.g_optiondata.GetKorIsTrue();
+        BackImage.sprite = (IsKorean) ? BackImage_K : BackImage_E;
     }
 
     public void ShowPages()

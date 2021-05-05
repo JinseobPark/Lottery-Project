@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public class Result_UI : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI MyPickText;
@@ -11,6 +12,11 @@ public class Result_UI : MonoBehaviour
     public TMPro.TextMeshProUGUI DayText;
 
     public ResultSystem resultsystem_sc;
+
+    //Back image for lang
+    public Sprite BackImage_E;
+    public Sprite BackImage_K;
+    public Image BackImage;
 
     public void ShowWonMoney()
     {
@@ -57,11 +63,18 @@ public class Result_UI : MonoBehaviour
         DayText.text = "Day : " + resultsystem_sc.thisGame.day_time;
     }
 
+    public void LanguageUpdate()
+    {
+        bool IsKorean = OptionData.g_optiondata.GetKorIsTrue();
+        BackImage.sprite = (IsKorean) ? BackImage_K : BackImage_E;
+    }
     // Start is called before the first frame update
     void Start()
     {
+        BackImage = GameObject.Find("Back").GetComponent<Image>();
         ShowMyPickedNumber();
         ShowWonMoney();
+        LanguageUpdate();
     }
     // Update is called once per frame
     void Update()
