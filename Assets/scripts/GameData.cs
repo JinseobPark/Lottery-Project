@@ -101,6 +101,8 @@ public class GameData : MonoBehaviour
         {
             Destroy(this);
         }
+        g_gamedata.global_money = start_money;
+        ReadGameDataFromJson();
 
     }
 
@@ -202,8 +204,6 @@ public class GameData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        g_gamedata.global_money = start_money;
-        ReadGameDataFromJson();
         //SaveGameDataToJson();
     }
 

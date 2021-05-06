@@ -106,6 +106,7 @@ public class Option_UI : MonoBehaviour
     //Cancel and back.
     public void CancelBackToMenu()
     {
+        AudioManager.Audio_Instance.PlayButtonSound();
         SceneManager.LoadScene("Main");
     }
 

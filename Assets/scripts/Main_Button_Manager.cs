@@ -26,12 +26,25 @@ public class Main_Button_Manager : MonoBehaviour
 
     void Start()
     {
+        CheckAndPlayBGM();
         StartImage = GameObject.Find("Start").GetComponent<Image>();
         OptionImage = GameObject.Find("Option").GetComponent<Image>();
         BillImage = GameObject.Find("Bill").GetComponent<Image>();
         LanguageUpdate();
     }
 
+    void CheckAndPlayBGM()
+    {
+        if(OptionData.g_optiondata.GetSoundIsTrue())
+        {
+            if (!AudioManager.Audio_Instance.IsPlayBGM())
+             AudioManager.Audio_Instance.PlayBGMSound();
+        }
+        else
+        {
+            AudioManager.Audio_Instance.StopBGMSound();
+        }
+    }
     public void LanguageUpdate()
     {
         bool IsKorean = OptionData.g_optiondata.GetKorIsTrue();
@@ -41,22 +54,26 @@ public class Main_Button_Manager : MonoBehaviour
     }
     public void StartGameButton()
     {
+        AudioManager.Audio_Instance.PlayButtonSound();
         SceneManager.LoadScene("Lottery645");
     }
 
     public void GiveMoneyButton()
     {
+        AudioManager.Audio_Instance.PlayButtonSound();
         GameData.Instance.AddGameMoney(takemoney);
     }
 
     public void ShowBillButton()
     {
+        AudioManager.Audio_Instance.PlayButtonSound();
         SceneManager.LoadScene("Bill_Scene");
     }
 
 
     public void OptionButton()
     {
+        AudioManager.Audio_Instance.PlayButtonSound();
         SceneManager.LoadScene("Option");
     }
 

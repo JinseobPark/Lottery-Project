@@ -27,6 +27,7 @@ public class UIWork : MonoBehaviour
         }
         BMscript.current_button_number = 0;
         BMscript.current_going_list = 0;
+        AudioManager.Audio_Instance.PlayButtonSound();
     }
 
     public void Enroll_numbers()
@@ -48,6 +49,7 @@ public class UIWork : MonoBehaviour
             //cant enroll
             Debug.Log("Pick 6 numbers");
         }
+        AudioManager.Audio_Instance.PlayButtonSound();
     }
 
 
@@ -91,6 +93,7 @@ public class UIWork : MonoBehaviour
              */
         }
         //else. nope change.
+        AudioManager.Audio_Instance.PlayButtonSound();
     }
 
     bool Able_enroll()

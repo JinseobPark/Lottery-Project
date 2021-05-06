@@ -65,6 +65,7 @@ public class OptionData : MonoBehaviour
         {
             Destroy(this);
         }
+        LoadOptionData();
     }
 
     public void LoadOptionData()
@@ -106,7 +107,6 @@ public class OptionData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadOptionData();
     }
 
     // Update is called once per frame

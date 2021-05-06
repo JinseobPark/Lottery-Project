@@ -30,6 +30,7 @@ public class BuyButton : MonoBehaviour
             GameData.Instance.AddPickedNumbersFromPickedArray(BMscript);
             GameData.Instance.SaveGameDataToJson();
 
+            AudioManager.Audio_Instance.PlayButtonSound();
             //movemove
             SceneManager.LoadScene("Lottery645result");
         }
@@ -38,7 +39,7 @@ public class BuyButton : MonoBehaviour
     bool CanBuyTicket()
     {
         //if (GSscript.GameMoney >= BMscript.current_enrolled_number * 1000 && GSscript.can_buy)
-        if(GameData.Instance.GetGameMoney() >= BMscript.current_enrolled_number * 1000)
+        if(GameData.Instance.GetGameMoney() >= BMscript.current_enrolled_number * 1000 && BMscript.current_enrolled_number >= 1)
             return true;
         else
             return false;
@@ -47,6 +48,7 @@ public class BuyButton : MonoBehaviour
 
     public void BackButton()
     {
+        AudioManager.Audio_Instance.PlayButtonSound();
         SceneManager.LoadScene("Main");
     }
 }

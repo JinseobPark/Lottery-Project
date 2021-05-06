@@ -36,6 +36,7 @@ public class delAndModEnrolledButton : MonoBehaviour
         BMscript.current_button_number = 0;
         BMscript.current_going_list = 0;
         BMscript.current_enrolled_number--;
+        AudioManager.Audio_Instance.PlayButtonSound();
     }
 
     public void Modify_enrolled_balls()
@@ -60,6 +61,7 @@ public class delAndModEnrolledButton : MonoBehaviour
             BMscript.current_enrolled_number--;
             BMscript.current_going_list = line_number;
         }
+        AudioManager.Audio_Instance.PlayButtonSound();
     }
 
 }

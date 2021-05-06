@@ -55,6 +55,7 @@ public class Result_UI : MonoBehaviour
     }
     public void BackToMenu()
     {
+        AudioManager.Audio_Instance.PlayButtonSound();
         SceneManager.LoadScene("Main");
     }
 

@@ -44,6 +44,7 @@ public class Bill_UI : MonoBehaviour
     }
     public void BackToMenu()
     {
+        AudioManager.Audio_Instance.PlayButtonSound();
         SceneManager.LoadScene("Main");
     }
 
