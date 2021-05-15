@@ -133,8 +133,11 @@ public class GameData : MonoBehaviour
     public void AddOneGames(OneGame onegame)
     {
         //if more 10 games, delete oldest game.
-        if (g_gamedata.one_games.Count > 10)
-            g_gamedata.one_games.RemoveAt(9);
+        if (g_gamedata.one_games.Count >= 10)
+        {
+            for (int i = g_gamedata.one_games.Count - 1; i >= 9; --i)
+                g_gamedata.one_games.RemoveAt(i);
+        }
         //g_gamedata.one_games.Add(onegame);
         g_gamedata.one_games.Insert(0, onegame);
     }
@@ -143,7 +146,7 @@ public class GameData : MonoBehaviour
     {
         g_gamedata.global_money = 0;
         g_gamedata.one_games.Clear();
-        g_gamedata.lastGetTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
+        g_gamedata.lastGetTime = DateTime.Now.ToString("yyyy-MM-dd");
     }
 
     public void AddPickedNumbersFromPickedArray(buttonManager pickedArray)
@@ -178,14 +181,32 @@ public class GameData : MonoBehaviour
 
     public void GetTimeMoney()
     {
-        DateTime Nowtime = DateTime.Now;
-        DateTime LastGetTime = DateTime.ParseExact(g_gamedata.lastGetTime, "yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture);
-        TimeSpan timeCal = Nowtime - LastGetTime;
-        if(timeCal.Days >= 1)
+        if(TryGetMoney())
         {
             g_gamedata.global_money = start_money;
-            g_gamedata.lastGetTime  = DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
+            g_gamedata.lastGetTime = DateTime.Now.ToString("yyyy-MM-dd");
         }
+    }
+
+    public bool TryGetMoney()
+    {
+        DateTime Nowtime = DateTime.Now;
+        DateTime LastGetTime;
+        try
+        {
+            LastGetTime = DateTime.ParseExact(g_gamedata.lastGetTime, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+        }
+        catch(Exception e)
+        {
+            LastGetTime = DateTime.Now;
+            g_gamedata.lastGetTime = DateTime.Now.ToString("yyyy-MM-dd");
+            g_gamedata.global_money = start_money;
+
+            Debug.Log("couldn't converse time to lastGetTime:" + e.Message);
+        }
+        int timeCal = Nowtime.Day - LastGetTime.Day;
+
+        return (timeCal >= 1) ? true : false;
     }
 
     public void SaveGameDataToJson()
@@ -203,12 +224,12 @@ public class GameData : MonoBehaviour
     public void ReadGameDataFromJson()
     {
         string gamedatafilePath = Application.persistentDataPath + "/gameData.json";
-        if (File.Exists(gamedatafilePath))
+        try
         {
             string str_gamedata = File.ReadAllText(gamedatafilePath);
             g_gamedata = JsonUtility.FromJson<GameData_Global>(str_gamedata);
         }
-        else
+        catch
         {
             ClearData();
             SetGameMoney(start_money);

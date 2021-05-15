@@ -91,4 +91,9 @@ public class Main_Button_Manager : MonoBehaviour
         InfoImage.enabled = (IsShowInfo) ? true : false;
     }
 
+    void Update()
+    {
+        GameData.Instance.TryGetMoney();
+    }
+
 }
