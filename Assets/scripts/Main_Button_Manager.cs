@@ -19,17 +19,24 @@ public class Main_Button_Manager : MonoBehaviour
     //bill Image by lang
     public Sprite BillImage_K;
     public Sprite BillImage_E;
-    
+    //Info Image by lang
+    public Sprite InfoImage_K;
+    public Sprite InfoImage_E;
+
     private Image StartImage;
     private Image OptionImage;
     private Image BillImage;
+    private Image InfoImage;
 
+    public bool IsShowInfo;
     void Start()
     {
         CheckAndPlayBGM();
         StartImage = GameObject.Find("Start").GetComponent<Image>();
         OptionImage = GameObject.Find("Option").GetComponent<Image>();
         BillImage = GameObject.Find("Bill").GetComponent<Image>();
+        InfoImage = GameObject.Find("InfoBox").GetComponent<Image>();
+        IsShowInfo = false;
         LanguageUpdate();
     }
 
@@ -51,6 +58,7 @@ public class Main_Button_Manager : MonoBehaviour
         StartImage.sprite  = (IsKorean) ? StartImage_K  : StartImage_E;
         OptionImage.sprite = (IsKorean) ? OptionImage_K : OptionImage_E;
         BillImage.sprite   = (IsKorean) ? BillImage_K   : BillImage_E;
+        InfoImage.sprite   = (IsKorean) ? InfoImage_K   : InfoImage_E;
     }
     public void StartGameButton()
     {
@@ -75,6 +83,12 @@ public class Main_Button_Manager : MonoBehaviour
     {
         AudioManager.Audio_Instance.PlayButtonSound();
         SceneManager.LoadScene("Option");
+    }
+
+    public void QuestionBoxButton()
+    {
+        IsShowInfo = !IsShowInfo;
+        InfoImage.enabled = (IsShowInfo) ? true : false;
     }
 
 }

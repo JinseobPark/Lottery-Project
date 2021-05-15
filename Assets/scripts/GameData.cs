@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using System.Runtime.CompilerServices;
 using UnityEngine.UI;
+using System.Globalization;
 using System.Data;
 
 [System.Serializable]
@@ -64,6 +65,7 @@ public class OneGame
 public class GameData_Global
 {
     public int global_money;
+    public string lastGetTime;
     public WonMoney_List WonMoney = new WonMoney_List();
     public List<OneGame> one_games = new List<OneGame>();
 }
@@ -103,6 +105,7 @@ public class GameData : MonoBehaviour
         }
         g_gamedata.global_money = start_money;
         ReadGameDataFromJson();
+        GetTimeMoney();
 
     }
 
@@ -140,6 +143,7 @@ public class GameData : MonoBehaviour
     {
         g_gamedata.global_money = 0;
         g_gamedata.one_games.Clear();
+        g_gamedata.lastGetTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
     }
 
     public void AddPickedNumbersFromPickedArray(buttonManager pickedArray)
@@ -172,7 +176,17 @@ public class GameData : MonoBehaviour
         return g_gamedata.one_games[0];
     }
 
-
+    public void GetTimeMoney()
+    {
+        DateTime Nowtime = DateTime.Now;
+        DateTime LastGetTime = DateTime.ParseExact(g_gamedata.lastGetTime, "yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture);
+        TimeSpan timeCal = Nowtime - LastGetTime;
+        if(timeCal.Days >= 1)
+        {
+            g_gamedata.global_money = start_money;
+            g_gamedata.lastGetTime  = DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
+        }
+    }
 
     public void SaveGameDataToJson()
     {
@@ -197,7 +211,7 @@ public class GameData : MonoBehaviour
         else
         {
             ClearData();
-            SetGameMoney(5000);
+            SetGameMoney(start_money);
             File.WriteAllText(gamedatafilePath, JsonUtility.ToJson(g_gamedata, true));
         }
     }

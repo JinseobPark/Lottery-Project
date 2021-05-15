@@ -69,7 +69,7 @@ public class ResultSystem : MonoBehaviour
         {
             Money += matchedPrise(CountDiff(thisGame.picked_game[i]), BonusDiff(thisGame.picked_game[i]));
         }
-
+        AudioManager.Audio_Instance.PlayMoneyWinSound(Money);
         thisGame.take_value = Money;
 
     }

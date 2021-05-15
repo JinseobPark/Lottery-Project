@@ -9,8 +9,12 @@ public class SoundBox
     public GameObject BGM_Object;
     public GameObject Button_Object;
     public GameObject Fail_Object;
+    public GameObject Won_Object;
+    public GameObject BigWon_Object;
     public AudioClip Button_sound;
     public AudioClip Fail_sound;
+    public AudioClip Won_sound;
+    public AudioClip BigWon_sound;
 }
 
 public class AudioManager : MonoBehaviour
@@ -54,8 +58,12 @@ public class AudioManager : MonoBehaviour
         g_soundbox.BGM_Object    = GameObject.Find("BGM_source");
         g_soundbox.Button_Object = GameObject.Find("Button_source");
         g_soundbox.Fail_Object   = GameObject.Find("Fail_source");
+        g_soundbox.Won_Object    = GameObject.Find("Won_source");
+        g_soundbox.BigWon_Object = GameObject.Find("BigWon_source");
         g_soundbox.Button_sound  = g_soundbox.Button_Object.GetComponent<AudioSource>().clip;
         g_soundbox.Fail_sound    = g_soundbox.Fail_Object.GetComponent<AudioSource>().clip;
+        g_soundbox.Won_sound     = g_soundbox.Won_Object.GetComponent<AudioSource>().clip;
+        g_soundbox.BigWon_sound  = g_soundbox.BigWon_Object.GetComponent<AudioSource>().clip;
         PlayIntroSound();
     }
     public void PlayIntroSound()
@@ -85,18 +93,28 @@ public class AudioManager : MonoBehaviour
         if (OptionData.g_optiondata.GetSoundIsTrue())
             g_soundbox.Fail_Object.GetComponent<AudioSource>().PlayOneShot(g_soundbox.Fail_sound);
     }
-    public void PlayWinSound(int prize)
+    public void PlayWonSound()
+    {
+        if (OptionData.g_optiondata.GetSoundIsTrue())
+            g_soundbox.Fail_Object.GetComponent<AudioSource>().PlayOneShot(g_soundbox.Won_sound);
+    }
+    public void PlayBigWonSound()
+    {
+        if (OptionData.g_optiondata.GetSoundIsTrue())
+            g_soundbox.Fail_Object.GetComponent<AudioSource>().PlayOneShot(g_soundbox.BigWon_sound);
+    }
+    public void PlayMoneyWinSound(int prize)
     {
         const int ThreeMatch = 5000;
         const int FourMatch = 50000;
         const int FiveMatch = 1000000;
         const int BonusMatch = 50000000;
         const int SixMatch = 2000000000;
-        if (prize >= SixMatch) PlayFailSound();
-        else if (prize >= BonusMatch) PlayFailSound();
-        else if (prize >= FiveMatch)  PlayFailSound();
-        else if (prize >= FourMatch)  PlayFailSound();
-        else if (prize >= ThreeMatch) PlayFailSound();
+        if (prize >= SixMatch)        PlayBigWonSound();
+        else if (prize >= BonusMatch) PlayBigWonSound();
+        else if (prize >= FiveMatch)  PlayBigWonSound();
+        else if (prize >= FourMatch)  PlayWonSound();
+        else if (prize >= ThreeMatch) PlayWonSound();
         else
         {
             PlayFailSound();

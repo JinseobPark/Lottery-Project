@@ -117,7 +117,7 @@ public class Bill_UI : MonoBehaviour
     {
         leftPageNumber = (currentPageNumber - 1) * 2;
         leftOneGame = GameData.g_gamedata.one_games[leftPageNumber];
-        Bill_Left_Text.text = " " + ShowDay(leftOneGame) + ShowWonNumber(leftOneGame) + ShowPickedNumber(leftOneGame) + ShowGotMoney(leftOneGame);
+        Bill_Left_Text.text = " " + ShowDay(leftOneGame) + ShowWonNumber(leftOneGame) + "\n" + ShowPickedNumber(leftOneGame) + "\n" +ShowGotMoney(leftOneGame);
         /*Day + won number + picked number + money*/
     }
 
@@ -127,7 +127,7 @@ public class Bill_UI : MonoBehaviour
         if (GameData.g_gamedata.one_games.Count >= RightPageNumber+1)
         {
             rightOneGame = GameData.g_gamedata.one_games[RightPageNumber];
-            Bill_Right_Text.text = " " + ShowDay(rightOneGame) + ShowWonNumber(rightOneGame) + ShowPickedNumber(rightOneGame) + ShowGotMoney(rightOneGame);
+            Bill_Right_Text.text = " " + ShowDay(rightOneGame) + ShowWonNumber(rightOneGame) + "\n" + ShowPickedNumber(rightOneGame) + "\n" + ShowGotMoney(rightOneGame);
         }
         else
         {
