@@ -1,2 +1,4 @@
-# lottoery_android
- lotto android ver
+# Lottery Simulation(복권 시뮬레이션)
+ 21/05/17 구글 플레이에 등록되었습니다!
+ 
+ 21/05/21 도박을 조장하는 시뮬레이션으로 스토어에서 내려가게되었습니다 
